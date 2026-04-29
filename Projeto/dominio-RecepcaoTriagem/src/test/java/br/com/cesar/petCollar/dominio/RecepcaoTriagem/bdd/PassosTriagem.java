@@ -6,7 +6,7 @@ import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
 import petcollar.dominio.recepcaotriagem.paciente.Especie;
 import petcollar.dominio.recepcaotriagem.paciente.Paciente;
-import petcollar.dominio.recepcaotriagem.paciente.PacienteId;
+import br.com.cesar.petCollar.dominio.compartilhado.PacienteId;
 import petcollar.dominio.recepcaotriagem.triagem.CorDeRisco;
 import petcollar.dominio.recepcaotriagem.triagem.PesoTotal;
 import petcollar.dominio.recepcaotriagem.triagem.RespostaSintoma;
@@ -17,16 +17,14 @@ import petcollar.dominio.recepcaotriagem.triagem.TriagemId;
 
 import java.time.LocalDate;
 
-import br.com.cesar.petCollar.dominio.RecepcaoTriagem.bdd.ContextoCenarioF02;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class PassosTriagem {
 
-    private final ContextoCenarioF02 contexto;
+    private final ContextoCenario contexto;
 
-    public PassosTriagem(ContextoCenarioF02 contexto) {
+    public PassosTriagem(ContextoCenario contexto) {
         this.contexto = contexto;
     }
 

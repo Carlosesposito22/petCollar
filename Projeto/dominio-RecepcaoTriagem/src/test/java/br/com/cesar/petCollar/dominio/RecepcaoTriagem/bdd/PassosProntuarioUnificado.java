@@ -5,7 +5,7 @@ import io.cucumber.java.pt.E;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
 import petcollar.dominio.recepcaotriagem.prontuario.CPF;
-import petcollar.dominio.recepcaotriagem.prontuario.PacienteId;
+import br.com.cesar.petCollar.dominio.compartilhado.PacienteId;
 import petcollar.dominio.recepcaotriagem.prontuario.ResultadoBusca;
 import petcollar.dominio.recepcaotriagem.prontuario.ResultadoBuscaId;
 import petcollar.dominio.recepcaotriagem.prontuario.Tutor;
@@ -19,9 +19,9 @@ import static org.mockito.Mockito.*;
 
 public class PassosProntuarioUnificado {
 
-    private final ContextoCenarioF01 contexto;
+    private final ContextoCenario contexto;
 
-    public PassosProntuarioUnificado(ContextoCenarioF01 contexto) {
+    public PassosProntuarioUnificado(ContextoCenario contexto) {
         this.contexto = contexto;
     }
 

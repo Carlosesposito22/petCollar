@@ -14,5 +14,5 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
     key = GLUE_PROPERTY_NAME,
     value = "petcollar.dominio.recepcaotriagem.bdd"
 )
-public class CucumberRunnerTestF01 {
+public class CucumberRunnerTest {
 }

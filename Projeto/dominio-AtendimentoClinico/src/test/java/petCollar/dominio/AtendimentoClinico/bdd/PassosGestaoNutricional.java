@@ -9,7 +9,6 @@ import petCollar.dominio.AtendimentoClinico.nutricao.*;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 public class PassosGestaoNutricional {
 
