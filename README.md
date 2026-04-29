@@ -46,7 +46,7 @@ O **Sistema de Inteligência Clínica e Gestão Veterinária** é uma plataforma
 > - 🧩 [CML](https://github.com/Carlosesposito22/petCollar/tree/main/entregaveis/cml)
 > - 🧠 [Domínio](https://github.com/Carlosesposito22/petCollar/tree/main/entregaveis/dominio)
 > - 🗺️ [Mapa de Histórias](https://github.com/Carlosesposito22/petCollar/tree/main/entregaveis/mapa)
-> - 🎨 [Protótipo](https://disco-fancy-97893312.figma.site/)
+> - 🎨 [Protótipo](https://wink-equity-09401367.figma.site/)
 >
 > Clique nos nomes acima para acessar os arquivos correspondentes.  
 > As imagens abaixo também são clicáveis e redirecionam para suas respectivas pastas.
