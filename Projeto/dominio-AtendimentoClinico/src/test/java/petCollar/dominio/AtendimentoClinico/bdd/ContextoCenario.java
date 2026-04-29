@@ -1,8 +1,8 @@
-package petcollar.dominio.atendimentoclinico.bdd;
+package petCollar.dominio.AtendimentoClinico.bdd;
 
 import org.mockito.Mockito;
-import petcollar.dominio.atendimentoclinico.relatorio.*;
-import petcollar.dominio.atendimentoclinico.nutricao.*;
+import petCollar.dominio.AtendimentoClinico.relatorio.*;
+import petCollar.dominio.AtendimentoClinico.nutricao.*;
 
 import java.util.List;
 

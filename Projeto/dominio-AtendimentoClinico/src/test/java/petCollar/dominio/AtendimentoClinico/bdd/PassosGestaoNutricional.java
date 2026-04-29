@@ -1,12 +1,11 @@
-package petcollar.dominio.atendimentoclinico.bdd;
+package petCollar.dominio.AtendimentoClinico.bdd;
 
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.E;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
-import petcollar.dominio.atendimentoclinico.nutricao.*;
+import petCollar.dominio.AtendimentoClinico.nutricao.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
