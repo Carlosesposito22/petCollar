@@ -1,4 +1,4 @@
-package petCollar.dominio.AtendimentoClinico.bdd;
+package petcollar.dominio.atendimentoclinico.bdd;
 
 import org.mockito.Mockito;
 import br.com.cesar.petCollar.dominio.compartilhado.PacienteId;

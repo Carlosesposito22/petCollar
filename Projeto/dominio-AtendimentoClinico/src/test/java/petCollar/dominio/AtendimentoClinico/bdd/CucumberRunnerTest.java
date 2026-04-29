@@ -1,4 +1,4 @@
-package petCollar.dominio.AtendimentoClinico.bdd;
+package petcollar.dominio.atendimentoclinico.bdd;
 
 import org.junit.platform.suite.api.ConfigurationParameter;
 import org.junit.platform.suite.api.IncludeEngines;

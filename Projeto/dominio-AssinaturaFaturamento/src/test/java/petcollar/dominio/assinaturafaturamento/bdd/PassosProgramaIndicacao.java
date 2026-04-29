@@ -1,9 +1,9 @@
 package petcollar.dominio.assinaturafaturamento.bdd;
 
-import io.cucumber.java.pt.Dado;
-import io.cucumber.java.pt.E;
-import io.cucumber.java.pt.Então;
-import io.cucumber.java.pt.Quando;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.mockito.ArgumentCaptor;
 import petcollar.dominio.assinaturafaturamento.CobrancaId;
 import petcollar.dominio.assinaturafaturamento.StatusAssinatura;
@@ -26,14 +26,14 @@ public class PassosProgramaIndicacao {
 
     // ── Cenário 1: Tutor ativo gera link ────────────────────────────────────
 
-    @Dado("o Tutor com status de conta {string} esta autenticado")
+    @Given("o Tutor com status de conta {string} esta autenticado")
     public void dadoTutorComStatusDeConta(String statusStr) {
         contexto.excecaoCapturada = null;
         contexto.linkIndicacao = null;
         when(contexto.linkIndicacaoRepositorio.findByTutorId(anyString())).thenReturn(null);
     }
 
-    @Quando("o servico GeracaoLinkIndicacaoService for chamado para o Tutor com status {string}")
+    @When("o servico GeracaoLinkIndicacaoService for chamado para o Tutor com status {string}")
     public void quandoGeracaoLinkForChamado(String statusStr) {
         try {
             StatusAssinatura status = StatusAssinatura.valueOf(statusStr);
@@ -44,7 +44,7 @@ public class PassosProgramaIndicacao {
         }
     }
 
-    @Então("um CodigoIndicacao alfanumerico unico deve ser gerado")
+    @Then("um CodigoIndicacao alfanumerico unico deve ser gerado")
     public void entaoCodigoIndicacaoGerado() {
         assertNull(contexto.excecaoCapturada, "Não deveria ter lançado exceção.");
         assertNotNull(contexto.linkIndicacao);
@@ -52,20 +52,20 @@ public class PassosProgramaIndicacao {
         assertFalse(contexto.linkIndicacao.getCodigoIndicacao().getValor().isBlank());
     }
 
-    @E("a UrlCompartilhamento permanente para WhatsApp deve ser criada")
+    @And("a UrlCompartilhamento permanente para WhatsApp deve ser criada")
     public void eUrlCompartilhamentoCriada() {
         assertNotNull(contexto.linkIndicacao.getUrlCompartilhamento());
         assertFalse(contexto.linkIndicacao.getUrlCompartilhamento().getUrlCompleta().isBlank());
     }
 
-    @E("o StatusLink deve ser {string}")
+    @And("o StatusLink deve ser {string}")
     public void eStatusLinkDeve(String statusEsperado) {
         assertEquals(StatusLink.valueOf(statusEsperado), contexto.linkIndicacao.getStatus());
     }
 
     // ── Cenário 2: Idempotência ──────────────────────────────────────────────
 
-    @Dado("o Tutor ja possui um LinkIndicacao com status {string}")
+    @Given("o Tutor ja possui um LinkIndicacao com status {string}")
     public void dadoTutorJaPossuiLink(String statusStr) {
         contexto.excecaoCapturada = null;
         CodigoIndicacao codigo = CodigoIndicacao.gerar();
@@ -78,7 +78,7 @@ public class PassosProgramaIndicacao {
                 .thenReturn(contexto.linkIndicacao);
     }
 
-    @Quando("o servico GeracaoLinkIndicacaoService for chamado novamente")
+    @When("o servico GeracaoLinkIndicacaoService for chamado novamente")
     public void quandoGeracaoLinkChamadaNovamente() {
         try {
             LinkIndicacao retornado = contexto.geracaoLinkService.gerarOuObterLink(
@@ -89,7 +89,7 @@ public class PassosProgramaIndicacao {
         }
     }
 
-    @Então("o mesmo LinkIndicacao existente deve ser retornado sem criar um novo")
+    @Then("o mesmo LinkIndicacao existente deve ser retornado sem criar um novo")
     public void entaoMesmoLinkRetornado() {
         assertNull(contexto.excecaoCapturada, "Não deveria ter lançado exceção.");
         assertNotNull(contexto.linkIndicacao);
@@ -99,13 +99,13 @@ public class PassosProgramaIndicacao {
 
     // ── Cenário 3: Tutor inativo não pode gerar link ─────────────────────────
 
-    @Então("o sistema deve rejeitar a operacao")
+    @Then("o sistema deve rejeitar a operacao")
     public void entaoSistemaDeveRejeitarOperacao() {
         assertNotNull(contexto.excecaoCapturada);
         assertInstanceOf(IllegalStateException.class, contexto.excecaoCapturada);
     }
 
-    @E("nenhum link deve ser gerado")
+    @And("nenhum link deve ser gerado")
     public void eNenhumLinkGerado() {
         assertNull(contexto.linkIndicacao);
         verify(contexto.linkIndicacaoRepositorio, never()).save(any());
@@ -113,7 +113,7 @@ public class PassosProgramaIndicacao {
 
     // ── Cenário 4: Prevenção de auto-indicação ───────────────────────────────
 
-    @Dado("existe um LinkIndicacao cujo proprietario tem CPF {string}")
+    @Given("existe um LinkIndicacao cujo proprietario tem CPF {string}")
     public void dadoLinkComCpfProprietario(String cpfProprietario) {
         contexto.excecaoCapturada = null;
         CodigoIndicacao codigo = CodigoIndicacao.gerar();
@@ -123,7 +123,7 @@ public class PassosProgramaIndicacao {
                 contexto.linkIndicacaoId, "tutor-indicador", cpfProprietario, codigo, url);
     }
 
-    @Dado("existe uma ConversaoIndicacao com CPF indicado {string}")
+    @Given("existe uma ConversaoIndicacao com CPF indicado {string}")
     public void dadoConversaoComCpfIndicado(String cpfIndicado) {
         LinkIndicacaoId linkId = contexto.linkIndicacaoId != null
                 ? contexto.linkIndicacaoId
@@ -135,7 +135,7 @@ public class PassosProgramaIndicacao {
                 .thenReturn(contexto.conversaoIndicacao);
     }
 
-    @Quando("o ValidacaoFraudeService validar auto-indicacao para o CPF do proprietario {string}")
+    @When("o ValidacaoFraudeService validar auto-indicacao para o CPF do proprietario {string}")
     public void quandoValidarAutoIndicacao(String cpfIndicador) {
         try {
             contexto.validacaoFraudeService.validarAutoIndicacao(
@@ -145,14 +145,14 @@ public class PassosProgramaIndicacao {
         }
     }
 
-    @Então("o StatusConversao deve ser {string}")
+    @Then("o StatusConversao deve ser {string}")
     public void entaoStatusConversaoDeve(String statusEsperado) {
         assertNotNull(contexto.conversaoIndicacao);
         assertEquals(StatusConversao.valueOf(statusEsperado),
                 contexto.conversaoIndicacao.getStatus());
     }
 
-    @E("um EventoRastreio {string} deve constar na trilha de auditoria")
+    @And("um EventoRastreio {string} deve constar na trilha de auditoria")
     public void eEventoRastreioNaTrilha(String tipoEventoStr) {
         TipoEventoRastreio tipoEsperado = TipoEventoRastreio.valueOf(tipoEventoStr);
         List<EventoRastreio> trilha = contexto.conversaoIndicacao.getTrilhaAuditoria();
@@ -162,14 +162,14 @@ public class PassosProgramaIndicacao {
 
     // ── Cenário 5: CPF já convertido anteriormente ───────────────────────────
 
-    @Dado("o CPF {string} ja foi contabilizado como indicacao confirmada")
+    @Given("o CPF {string} ja foi contabilizado como indicacao confirmada")
     public void dadoCpfJaConvertido(String cpf) {
         contexto.excecaoCapturada = null;
         when(contexto.conversaoRepositorio.existsByCpfIndicadoEStatusConfirmada(cpf))
                 .thenReturn(true);
     }
 
-    @Quando("o ValidacaoFraudeService validar CPF ja convertido")
+    @When("o ValidacaoFraudeService validar CPF ja convertido")
     public void quandoValidarCpfJaConvertido() {
         try {
             contexto.validacaoFraudeService.validarCpfJaConvertido(contexto.conversaoIndicacao);
@@ -180,7 +180,7 @@ public class PassosProgramaIndicacao {
 
     // ── Cenário 6: Método de pagamento duplicado ─────────────────────────────
 
-    @Dado("existe uma ConversaoIndicacao em status {string} com hashMetodo igual ao do indicador")
+    @Given("existe uma ConversaoIndicacao em status {string} com hashMetodo igual ao do indicador")
     public void dadoConversaoComMetodoDuplicado(String statusStr) {
         contexto.excecaoCapturada = null;
         contexto.conversaoId = ConversaoId.gerar();
@@ -198,7 +198,7 @@ public class PassosProgramaIndicacao {
                 anyString(), anyString())).thenReturn(true);
     }
 
-    @Quando("o ConfirmacaoConversaoService processar o pagamento")
+    @When("o ConfirmacaoConversaoService processar o pagamento")
     public void quandoConfirmacaoProcessarPagamento() {
         try {
             contexto.indicacaoConfirmadaEvent = contexto.confirmacaoConversaoService.confirmar(
@@ -213,7 +213,7 @@ public class PassosProgramaIndicacao {
 
     // ── Cenário 7: Conversão válida dispara recompensa de duas vias ──────────
 
-    @Dado("existe uma ConversaoIndicacao com status {string} sem fraude detectada")
+    @Given("existe uma ConversaoIndicacao com status {string} sem fraude detectada")
     public void dadoConversaoSemFraude(String statusStr) {
         contexto.excecaoCapturada = null;
         contexto.conversaoId = ConversaoId.gerar();
@@ -232,7 +232,7 @@ public class PassosProgramaIndicacao {
                 anyString(), anyString())).thenReturn(false);
     }
 
-    @Quando("o webhook do gateway confirmar o pagamento da primeira mensalidade do indicado")
+    @When("o webhook do gateway confirmar o pagamento da primeira mensalidade do indicado")
     public void quandoWebhookConfirmarPagamento() {
         try {
             contexto.indicacaoConfirmadaEvent = contexto.confirmacaoConversaoService.confirmar(
@@ -245,7 +245,7 @@ public class PassosProgramaIndicacao {
         }
     }
 
-    @Então("o desconto de 30 por cento deve estar aplicado na Cobranca do indicado")
+    @Then("o desconto de 30 por cento deve estar aplicado na Cobranca do indicado")
     public void entaoDesconto30PorCento() {
         assertNull(contexto.excecaoCapturada, "Não deveria ter lançado exceção.");
         ArgumentCaptor<RecompensaIndicacao> captor =
@@ -256,13 +256,13 @@ public class PassosProgramaIndicacao {
         assertEquals(0.30, contexto.recompensaIndicacao.getDescontoIndicado().getPercentualDesconto());
     }
 
-    @E("o desconto de 15 por cento deve estar aplicado na fatura do indicador")
+    @And("o desconto de 15 por cento deve estar aplicado na fatura do indicador")
     public void eDesconto15PorCento() {
         assertTrue(contexto.recompensaIndicacao.getDescontoIndicador().isAplicado());
         assertEquals(0.15, contexto.recompensaIndicacao.getDescontoIndicador().getPercentualDesconto());
     }
 
-    @E("um IndicacaoConfirmadaEvent deve ser emitido")
+    @And("um IndicacaoConfirmadaEvent deve ser emitido")
     public void eIndicacaoConfirmadaEventEmitido() {
         assertNotNull(contexto.indicacaoConfirmadaEvent);
         assertEquals(contexto.conversaoId, contexto.indicacaoConfirmadaEvent.getConversaoId());
@@ -270,7 +270,7 @@ public class PassosProgramaIndicacao {
 
     // ── Cenário 8: Conquista Lendária ────────────────────────────────────────
 
-    @Dado("um IndicacaoConfirmadaEvent foi emitido para o TutorIndicador")
+    @Given("um IndicacaoConfirmadaEvent foi emitido para o TutorIndicador")
     public void dadoIndicacaoConfirmadaEvent() {
         contexto.excecaoCapturada = null;
         contexto.conversaoId = ConversaoId.gerar();
@@ -288,7 +288,7 @@ public class PassosProgramaIndicacao {
                 .thenReturn(contexto.recompensaIndicacao);
     }
 
-    @Quando("o DisparoGamificacaoService processar o evento")
+    @When("o DisparoGamificacaoService processar o evento")
     public void quandoDisparoGamificacaoProcessar() {
         try {
             contexto.gamificacaoEvent = contexto.disparoGamificacaoService
@@ -298,21 +298,21 @@ public class PassosProgramaIndicacao {
         }
     }
 
-    @Então("um IndicacaoValidadaParaGamificacaoEvent deve ser publicado com chaveEvento {string}")
+    @Then("um IndicacaoValidadaParaGamificacaoEvent deve ser publicado com chaveEvento {string}")
     public void entaoEventoGamificacaoPublicado(String chaveEsperada) {
         assertNull(contexto.excecaoCapturada, "Não deveria ter lançado exceção.");
         assertNotNull(contexto.gamificacaoEvent);
         assertEquals(chaveEsperada, contexto.gamificacaoEvent.getChaveEvento());
     }
 
-    @E("o campo gamificacaoDisparada da RecompensaIndicacao deve ser verdadeiro")
+    @And("o campo gamificacaoDisparada da RecompensaIndicacao deve ser verdadeiro")
     public void eGamificacaoDisparadaVerdadeiro() {
         assertTrue(contexto.recompensaIndicacao.isGamificacaoDisparada());
     }
 
     // ── Cenário 9: Last Click ────────────────────────────────────────────────
 
-    @Dado("existe uma ConversaoIndicacao associada ao link do Tutor {string}")
+    @Given("existe uma ConversaoIndicacao associada ao link do Tutor {string}")
     public void dadoConversaoAssociadaAoTutor(String tutorIdOrigem) {
         contexto.excecaoCapturada = null;
         contexto.conversaoId = ConversaoId.gerar();
@@ -324,7 +324,7 @@ public class PassosProgramaIndicacao {
                 .thenReturn(contexto.conversaoIndicacao);
     }
 
-    @Quando("o AtribuicaoLastClickService atribuir o ultimo clique ao link do Tutor {string}")
+    @When("o AtribuicaoLastClickService atribuir o ultimo clique ao link do Tutor {string}")
     public void quandoLastClickAtribuir(String novoTutorId) {
         try {
             contexto.conversaoIndicacao = contexto.lastClickService.atribuirUltimoClique(
@@ -334,7 +334,7 @@ public class PassosProgramaIndicacao {
         }
     }
 
-    @Então("o TutorIndicador atribuido deve ser {string}")
+    @Then("o TutorIndicador atribuido deve ser {string}")
     public void entaoTutorIndicadorDeve(String tutorIdEsperado) {
         assertNull(contexto.excecaoCapturada, "Não deveria ter lançado exceção.");
         assertEquals(tutorIdEsperado, contexto.conversaoIndicacao.getTutorIndicadorId());
@@ -342,7 +342,7 @@ public class PassosProgramaIndicacao {
 
     // ── Cenário 10: Desconto não cumulativo ──────────────────────────────────
 
-    @Dado("existe uma RecompensaIndicacao com desconto de indicacao de 30 por cento")
+    @Given("existe uma RecompensaIndicacao com desconto de indicacao de 30 por cento")
     public void dadoRecompensaComDesconto30() {
         contexto.excecaoCapturada = null;
         contexto.conversaoId = ConversaoId.gerar();
@@ -352,13 +352,13 @@ public class PassosProgramaIndicacao {
                 "tutor-indicador", CobrancaId.gerar(), CobrancaId.gerar());
     }
 
-    @Dado("o indicado possui um cupom promocional de {int} por cento")
+    @Given("o indicado possui um cupom promocional de {int} por cento")
     public void dadoCupomPromocional(int percentualCupom) {
         // o percentual do cupom é passado diretamente ao @Quando
         contexto.percentualDescontoResolvido = percentualCupom / 100.0;
     }
 
-    @Quando("o AplicacaoDescontoIndicadoService resolver o desconto mais vantajoso")
+    @When("o AplicacaoDescontoIndicadoService resolver o desconto mais vantajoso")
     public void quandoDescontoIndicadoResolver() {
         try {
             contexto.percentualDescontoResolvido = contexto.descontoIndicadoService
@@ -368,13 +368,13 @@ public class PassosProgramaIndicacao {
         }
     }
 
-    @Então("o percentual de desconto aplicado deve ser {double}")
+    @Then("o percentual de desconto aplicado deve ser {double}")
     public void entaoPercentualDeDesconto(double percentualEsperado) {
         assertNull(contexto.excecaoCapturada, "Não deveria ter lançado exceção.");
         assertEquals(percentualEsperado, contexto.percentualDescontoResolvido, 0.001);
     }
 
-    @E("o desconto de indicacao deve estar marcado como aplicado")
+    @And("o desconto de indicacao deve estar marcado como aplicado")
     public void eDescontoIndicacaoMarcadoAplicado() {
         assertTrue(contexto.recompensaIndicacao.getDescontoIndicado().isAplicado());
     }
