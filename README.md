@@ -57,7 +57,7 @@ O petCollar é uma plataforma de gestão veterinária de alta complexidade, dese
 > As imagens abaixo também são clicáveis e redirecionam para suas respectivas pastas.
 
 ---
-
+<!--
 ## 🏛️ **Arquitetura DDD**
 
 O sistema é estruturado em três **Bounded Contexts** com responsabilidades bem delimitadas, dois subdomínios **Core** e um **Supporting**, interligados por relações estratégicas de Upstream/Downstream e Shared Kernel.
@@ -113,8 +113,8 @@ Executa o atendimento médico-veterinário com foco em segurança do paciente. V
 **Agregados:** `Atendimento` · `PlanoNutricional` · `Prescricao`
 
 **Repositories:** `AtendimentoRepository` · `MedicoRepository` · `ConsultorioRepository` · `PlanoNutricionalRepository` · `PrescricaoRepository` · `MedicamentoRepository`
-
 ---
+  -->
 
 ## 📋 **Distribuição de Tarefas**
 
