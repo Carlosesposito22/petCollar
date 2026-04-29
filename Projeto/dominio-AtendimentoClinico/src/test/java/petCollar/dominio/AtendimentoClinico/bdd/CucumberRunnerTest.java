@@ -11,8 +11,8 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 @IncludeEngines("cucumber")
 @SelectPackages("features")
 @ConfigurationParameter(
-        key = GLUE_PROPERTY_NAME,
-        value = "petcollar.dominio.atendimentoclinico.bdd"
+    key = GLUE_PROPERTY_NAME,
+    value = "petcollar.dominio.atendimentoclinico.bdd"
 )
 public class CucumberRunnerTest {
 }
