@@ -37,8 +37,8 @@ O petCollar é uma plataforma de gestão veterinária de alta complexidade, dese
 
 ### **💳 Gestão Financeira e de Benefícios**
 
-- **Assinatura de Plano e Gestão Financeira:**Controle dinâmico de acesso com processamento de Juros Simples de 0,033% ao dia e transições automáticas de status da conta para Inadimplente ou Suspensa.
-- **Gerenciamento de Carência de Benefícios do Plano:**Motor de cálculo que monitora limites e períodos de carência em tempo real, emitindo Tickets de Benefício com código GUID único e validade de 48 horas.
+- **Assinatura de Plano e Gestão Financeira**: Controle dinâmico de acesso com processamento de Juros Simples de 0,033% ao dia e transições automáticas de status da conta para Inadimplente ou Suspensa.
+- **Gerenciamento de Carência de Benefícios do Plano**: Motor de cálculo que monitora limites e períodos de carência em tempo real, emitindo Tickets de Benefício com código GUID único e validade de 48 horas.
 
 ---
 
